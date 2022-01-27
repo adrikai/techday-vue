@@ -1,0 +1,126 @@
+<template>
+<div class="container">
+  <div class="card">
+    <div class="box" :style="themeModeComputed">
+      <div class="content">
+        <h2>{{age}}</h2>
+        <h3>{{name}}</h3>
+        <p>{{company}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+</template>
+
+<script>
+import { computed } from '@vue/runtime-core'
+export default {
+  name: "CardComponent",
+  props: {
+    name: String,
+    company: String,
+    age: String,
+    themeMode: String
+  },
+  setup(props) {
+    const themeModeComputed = computed(() => {
+      return {
+        backgroundColor: props.themeMode === 'xbox' ? '#3e6e1a' : '#2f5687'
+      };
+    })
+    return {
+      themeModeComputed
+    }
+  }
+}
+</script>
+
+<style scoped>
+.card {
+  position: relative;
+  min-width: 320px;
+  height: 440px;
+  box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.2),
+    inset -5px -5px 15px rgba(255, 255, 255, 0.1),
+    5px 5px 15px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  margin: 30px;
+  transition: 0.5s;
+}
+
+.card .box {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  background: #2a2b2f;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  transition: 0.5s;
+}
+
+.card .box:hover {
+  transform: translateY(-50px);
+}
+
+.card .box:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.card .box .content {
+  padding: 20px;
+  text-align: center;
+}
+
+.card .box .content h2 {
+  position: absolute;
+  top: -10px;
+  right: 30px;
+  font-size: 8rem;
+  color: rgba(255, 255, 255, 0.1);
+}
+
+.card .box .content h3 {
+  font-size: 1.8rem;
+  color: #fff;
+  z-index: 1;
+  transition: 0.5s;
+  margin-bottom: 15px;
+}
+
+.card .box .content p {
+  font-size: 1rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.9);
+  z-index: 1;
+  transition: 0.5s;
+}
+
+.card .box .content a {
+  position: relative;
+  display: inline-block;
+  padding: 8px 20px;
+  background: black;
+  border-radius: 5px;
+  text-decoration: none;
+  color: white;
+  margin-top: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transition: 0.5s;
+}
+.card .box .content a:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+  background: #fff;
+  color: #000;
+}
+</style>
